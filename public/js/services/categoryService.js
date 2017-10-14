@@ -12,7 +12,7 @@ angular.module('categoryService', [])
             // get all the categories
             get : function() {
                 console.log('get all categories');
-                return $http.get('./api/v1/category');
+                return $http.get('/api/v1/category');
             },
 
             // save a category (pass in category data)

@@ -24,7 +24,8 @@ Route::group(array('prefix' => 'v1'), function()
     Route::get('products',['as'=>'api.v1.product.index','uses'=> 'ApiControllers\ProductApiController@index']);
     Route::get('products/{id?}', ['as'=>'api.v1.product.show','uses'=>'ApiControllers\ProductApiController@show']);
 
-    Route::resource('api.v1.category', 'ApiControllers\CategoryApiController',
+
+    Route::resource('category', 'ApiControllers\CategoryApiController',
         array('only' => array('index','show', 'store', 'destroy')));
 
 });

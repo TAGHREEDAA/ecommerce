@@ -15,6 +15,7 @@ class CategoryApiController extends Controller
      */
     public function index()
     {
+//        dd('index category');
         return response()->json(array(
             'status' => 'success',
             'categories' => Category::all(),
@@ -120,7 +121,7 @@ class CategoryApiController extends Controller
             return response()->json(array(
                 'status' => 'success',
                 'error'=>$validator->errors(),
-                'message' => 'Error! Faild to create category.',
+                'message' => 'Error! Faild to update category.',
                 'status_code' => 422
             ));
 
@@ -149,6 +150,23 @@ class CategoryApiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deletedCategory=Category::find($id);
+        if(isset($deletedCategory))
+        {
+            $deletedCategory->products()->detach();
+            $deletedCategory->delete();
+
+            return response()->json(array(
+                'status' => 'success',
+                'message' => 'Category Deleted successfully',
+                'status_code' => 204
+            ));
+        }
+        else
+            return response()->json(array(
+                'status' => 'error',
+                'message' => 'Invalid Category ID!',
+                'status_code' => 404
+            ));
     }
 }

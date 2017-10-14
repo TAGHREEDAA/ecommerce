@@ -44,7 +44,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        dd($exception);
         if($this->isHttpException($exception)){
+
 
             switch ($exception->getStatusCode()) {
                 case 404:
