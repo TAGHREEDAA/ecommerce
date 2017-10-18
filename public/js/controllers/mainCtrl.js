@@ -20,7 +20,7 @@ angular.module('mainCtrl', [])
         // GET ALL CATEGORIES ==============
         Category.get()
             .success(function(data) {
-                $scope.categories = data;
+                $scope.categories = data.categories;
                 $scope.loading = false;
             });
 
@@ -33,11 +33,11 @@ angular.module('mainCtrl', [])
             // use the function we created in our service
             Category.save($scope.categoryData)
                 .success(function(data) {
-
+                    console.log('save');
                     // if successful, we'll need to refresh the category list
                     Category.get()
                         .success(function(getData) {
-                            $scope.categories = getData;
+                            $scope.categories = getData.categories;
                             $scope.loading = false;
                         });
 
@@ -56,10 +56,11 @@ angular.module('mainCtrl', [])
             Category.destroy(id)
                 .success(function(data) {
 
+                    console.log('destroy');
                     // if successful, we'll need to refresh the category list
                     Category.get()
                         .success(function(getData) {
-                            $scope.categories = getData;
+                            $scope.categories = getData.categories;
                             $scope.loading = false;
                         });
 

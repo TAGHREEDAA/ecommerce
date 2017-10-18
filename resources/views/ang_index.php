@@ -63,8 +63,8 @@
 
     <!-- THE CATEGORIES =============================================== -->
     <!-- hide these categories if the loading variable is true -->
-    <div class="category" ng-hide="loading" ng-repeat="category in categories">
-        <h3>Category #{{ category.id }} <small> {{ category.name }}</h3>
+    <div class="category" ng-hide="loading" ng-repeat="category in categories |orderBy:'id':reverse">
+        <h3>Category # {{ category.id }} <small> {{ category.name }}</h3>
         <p>{{ category.description }}</p>
 
         <p><a href="#" ng-click="deleteCategory(category.id)" class="text-muted">Delete</a></p>
