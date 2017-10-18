@@ -15,6 +15,12 @@ angular.module('categoryService', [])
                 return $http.get('./api/v1/category');
             },
 
+            // show category details
+            show : function(id) {
+                console.log('get all categories');
+                return $http.get('./api/v1/category/'+id);
+            },
+
             // save a category (pass in category data)
             save : function(categoryData) {
                 console.log('indide service save');

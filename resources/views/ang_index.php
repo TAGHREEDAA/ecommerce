@@ -42,15 +42,31 @@
         {{test}}
     </div>
 
+    <div ng-show="showFlag">
+        <h1>Current Category:</h1>
+        <h2>{{currentCategory.name}}</h2>
+        <p>{{currentCategory.description}}</p>
+        <h4> Parent Category ID:</h4>
+        <h3> currentCategory.parent_id</h3>
+    </div>
+    <br>
+    <hr>
     <form ng-submit="submitCategory()"> <!-- ng-submit will disable the default form action and use our function -->
 
         <div class="form-group">
-            <input type="text" class="form-control input-sm" name="name" ng-model="categoryData.name" placeholder="Name">
+            <input type="text" class="form-control input-sm" ng-required="true" name="name" ng-model="categoryData.name" placeholder="Name">
         </div>
 
         <div class="form-group">
             <input type="text" class="form-control input-lg" name="description" ng-model="categoryData.description" placeholder="Description">
         </div>
+        <div class="form-group">
+            <select ng-model="categoryData.parent_id" ng-required="true"
+                    ng-options="category.id as category.name for category in categories">
+                <option value="">Select Category</option>
+            </select>
+        </div>
+
 
         <div class="form-group text-right">
             <button type="submit" class="btn btn-primary btn-lg">Submit</button>
@@ -67,8 +83,10 @@
         <h3>Category # {{ category.id }} <small> {{ category.name }}</h3>
         <p>{{ category.description }}</p>
 
+        <p><a href="#" ng-click="showCategory(category.id)" class="text-muted">Show</a></p>
         <p><a href="#" ng-click="deleteCategory(category.id)" class="text-muted">Delete</a></p>
     </div>
+
 
 </div>
 </body>

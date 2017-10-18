@@ -11,6 +11,8 @@ angular.module('mainCtrl', [])
     .controller('mainController', function($scope, $http, Category) {
         // object to hold all the data for the new Category form
         $scope.categoryData = {};
+        $scope.showFlag=false;
+        $scope.currentCategory={};
 
         // loading variable to show the spinning loading icon
         $scope.loading = true;
@@ -66,5 +68,18 @@ angular.module('mainCtrl', [])
 
                 });
         };
+
+
+        $scope.showCategory=function(id){
+
+            $scope.loading = true;
+            Category.show(id)
+                .success(function(data) {
+                    console.log('show');
+                    $scope.showFlag = true;
+                    $scope.currentCategory = data.categories;
+                    $scope.loading = false;
+                });
+        }
 
     });
