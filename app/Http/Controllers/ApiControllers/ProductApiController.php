@@ -65,7 +65,7 @@ class ProductApiController extends Controller
         $prod->price      = $request->price;
         $prod->description= strip_tags($request->description, '<br>');
 
-        if(!is_null($request->hasFile('image')))
+        if($request->hasFile('image'))
         {
             $file = $request->file('image');
             $imageName = $file->getClientOriginalName();
@@ -145,7 +145,7 @@ class ProductApiController extends Controller
         $prod->price      = $request->price;
         $prod->description= strip_tags($request->description, '<br>');
 
-        if(!is_null($request->hasFile('image')))
+        if($request->hasFile('image'))
         {
             // 1- check if a new file was uploaded
 
