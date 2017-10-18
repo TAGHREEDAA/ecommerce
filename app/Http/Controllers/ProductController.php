@@ -65,7 +65,7 @@ class ProductController extends Controller
             $prod->price      = $request->price;
             $prod->description= strip_tags($request->description, '<br>');
 
-            if(!is_null($request->hasFile('image')))
+            if($request->hasFile('image'))
             {
                 $file = $request->file('image');
                 $imageName = $file->getClientOriginalName();
@@ -155,12 +155,13 @@ class ProductController extends Controller
             $prod->price      = $request->price;
             $prod->description= strip_tags($request->description, '<br>');
 
-            if(!is_null($request->hasFile('image')))
+
+            if($request->hasFile('image'))
             {
                 // 1- check if a new file was uploaded
 
                 // delete old image
-                unlink(public_path('images/products'), $prod->image);
+                unlink(public_path('images/products/').$prod->image);
 
                 // 2- replace the current image with the new file
                 $file = $request->file('image');
@@ -173,6 +174,7 @@ class ProductController extends Controller
 
             // save the pivot table data
             // insert a record for each  category
+            $prod->categories()->detach();
             $prod->categories()->attach($request->category_id);
             return redirect()->route('product.index')->with('success','Product updated successfully');
         }

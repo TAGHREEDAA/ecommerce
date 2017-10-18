@@ -150,7 +150,7 @@ class ProductApiController extends Controller
             // 1- check if a new file was uploaded
 
             // delete old image
-            unlink(public_path('images/products'), $prod->image);
+            unlink(public_path('images/products/').$prod->image);
 
             // 2- replace the current image with the new file
             $file = $request->file('image');
